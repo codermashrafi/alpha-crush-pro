@@ -9,6 +9,9 @@
 function handlekyebordbutton(event) {
   const plyerPrast = event.key;
   console.log("player prased", plyerPrast);
+  if (plyerPrast === "Escape") {
+    gaimeOver();
+  }
   // get the expeced to prassed
   const carrentAlphabat = document.getElementById("carruent-alphaber");
   const carrentAl = carrentAlphabat.innerText;
@@ -35,6 +38,10 @@ function handlekyebordbutton(event) {
     const carrentLife = parseInt(carrentLifeText);
     const newLIfe = carrentLife - 1;
     carrentLifeElement.innerText = newLIfe;
+
+    if (newLIfe === 0) {
+      gaimeOver();
+    }
   }
 }
 document.addEventListener("keyup", handlekyebordbutton);
@@ -49,6 +56,19 @@ function contnueGame() {
 }
 function play() {
   haideId("home-screen");
+  haideId("finalScore");
   showId("playGround");
+  setTextElementById("carrentLife", 5);
+  setTextElementById("carretScore", 0);
+
   contnueGame();
+}
+function gaimeOver() {
+  haideId("playGround");
+  showId("finalScore");
+  const lastScore = getTextElementById("carretScore");
+  console.log(lastScore);
+  setTextElementById("last-score", lastScore);
+  const currrentAlphabet = getTextById("carruent-alphaber");
+  removeBackgroundColor(currrentAlphabet);
 }
